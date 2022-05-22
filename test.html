@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        .slidecontainer {
+            width: 100%;
+            height: 35px;
+            position: relative;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            -webkit-transition: 0.2s;
+            transition: opacity 0.2s;
+            z-index: 999;
+        }
+
+        .slider-bg {
+            width: 100%;
+            background: #008bf4;
+            height: 100%;
+            position: absolute;
+            pointer-events: none;
+            border-radius: 20px;
+        }
+
+        .slider-fg {
+            width: 50%;
+            background: #0051bd;
+            height: 100%;
+            position: absolute;
+            pointer-events: none;
+            border-radius: 20px;
+        }
+
+        .ball {
+            width: 75px;
+            height: 75px;
+            background-color: white;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAMAAABXc8oyAAAAflBMVEUAAAAAUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb0AUb2Ma5uKAAAAKXRSTlMAsFCgE18KDfogBvTRVUDd8MmoTEU6I8S27ufi2byNhHZtSX0uKKySZS5G424AAAFLSURBVDjLxZPZdoMwDEQlamywCRCWkA0IZNX//2BZnOCGmvSt8wCj4Z4jI9swlx8EPlj1eDxdtouiXWYFEbU50ZaxLZ0WQNa9xI3qvqzpJqygt4JNoJyxdlSwsYHkpvHx+gyuxzi1gQWh0U8gnX8FBekPIk1H/kwo5mBwjNvBpbFSumurl2JqS3rxTFVSVor1Xv+cIVlTwke78mRXdxMYxBOq5cSZA26JdQG1YGzA01/MLZNRmedlxMHY0otupiLzEGwKosIcth+pfiGyIg/hh8TbUNCjSkLpNYiwKMTGK+EewmcQwrs2k5g/iM2O4BvYkFbzAcQiHFTgIjh5/CeQhxZwjy/t+9Al/pZp8PD10kGDs2y6qpwDsLGNvMyz6aomSXdoOaI101e1f7okEO3ZUDLIc2D9J1vGHWe9dl5aB+6gwMw6zyGjPyn7BofqHEF4UheqAAAAAElFTkSuQmCC);
+            position: absolute;
+            border: 2px solid #008bf4;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            top: 50%;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 75px;
+            width: 75px;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            border: 2px solid #008bf4;
+            background-color: #fff;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+        }
+
+        .text{
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            font-family: sans-serif;
+            font-weight: 700;
+        }
+
+        .sliderVal{
+            margin-left: .75rem;
+            font-size: 1.875rem;
+        }
+
+        .sliderVal_1{
+            margin-left: .75rem;
+            font-size: 1.875rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h3 class="text">
+        SALE PRICE:
+        <span class="sliderVal">$</span>
+    </h3>
+    <div class="slidecontainer range-slider-fill">
+        <div class="slider-bg"></div>
+        <div class="slider-fg"></div>
+        <div class="ball"></div>
+        <input type="range" min="500000" max="5000000" value="(5000000-50000)/2" class="slider" />
+    </div>
+    <h3 class="text">
+        SAVE
+        <span class="sliderVal_1">$</span>
+    </h3>
+    <script>
+        var slider = document.querySelector(".slider");
+        var saleprice = document.querySelector(".sliderVal");
+        var save = document.querySelector(".sliderVal_1");
+        var fg = document.querySelector(".slider-fg");
+        var ball = document.querySelector(".ball");
+
+        saleprice.innerHTML = '$' + (slider.value/1).toLocaleString();
+        save.innerHTML = '$' + (slider.value / 100).toLocaleString();
+
+        slider.oninput = function () {
+            saleprice.innerHTML = '$' + (this.value/1).toLocaleString();
+            save.innerHTML = '$' + (this.value / 100).toLocaleString();
+
+            var perc = (this.value - 500000) / 45000;
+            fg.style.width = perc + "%";
+            ball.style.left = perc + "%";
+        }
+        var perc = (slider.value - 500000) / 45000;
+        fg.style.width = perc + "%";
+        ball.style.left = perc + "%";
+    </script>
+</body>
+
+</html>
